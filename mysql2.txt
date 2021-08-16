@@ -1,0 +1,27 @@
+CREATE DATABASE blog2;
+
+use blog2;
+CREATE TABLE authors(id int auto_increment PRIMARY key,f_name VARCHAR(20),l_name VARCHAR(20) );
+INSERT into authors(f_name,l_name) VALUES('ravi','roy'),('durjoy','dutta'),('rohan','raj'),('avi','basu'),('paolo','coelho');
+CREATE TABLE posts(id1 int auto_increment PRIMARY KEY,title VARCHAR(50),content VARCHAR(150), author_id1 int, FOREIGN KEY(author_id1) 
+        REFERENCES authors(id)
+        );
+INSERT into posts(title,content,author_id1) VALUES('happy','i am happy',1),('sad','i am sad',2),('excited','i am excited',3),('emotional','i am emotional',4),('coder','i am coder',5);
+CREATE TABLE comments(body VARCHAR(100),author_id2 int,post_id1 int,FOREIGN KEY(author_id2) REFERENCES authors(id), FOREIGN KEY(post_id1) REFERENCES posts(id1) on DELETE CASCADE );
+INSERT INTO `comments`(body,author_id2,post_id1) VALUES('great',1,3),('carry on good work',2,3),('great writing',1,2),('you can do better',2,2),('egarly waiting for next',3,1);
+CREATE TABLE tags(tag VARCHAR(20),tag_id int ,FOREIGN KEY(tag_id) REFERENCES posts(id1));
+INSERT INTO tags(tag,tag_id) VALUES('happy',1),('sad',1),('enjoying',2),('rude',2),('reading',3);
+SELECT authors.*,posts.title,posts.content
+FROM authors join posts
+on authors.id=posts.author_id1
+WHERE authors.id=1;
+
+SELECT authors.*,comments.body
+FROM authors join `comments`
+on authors.id=comments.author_id2
+WHERE authors.id=1;
+
+UPDATE authors SET f_name = 'rohan'
+WHERE id=1;
+DELETE FROM tags where tag_id=3;
+
