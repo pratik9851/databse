@@ -1,0 +1,11 @@
+ use assignment
+ show collections
+ db.users.insert({"first_name":"Edith","last_name":"Beetles","email":"ebeetles0@eventbrite.com","gender":"Genderfluid","ip_address":"139.222.220.75","age":96})
+  db.users.insertMany([{"first_name":"Tuesday","last_name":"McCreery","email":"tmccreery1@seesaa.net","gender":"Genderfluid","ip_address":"176.209.97.215","age":98},{"first_name":"Gabby","last_name":"Teers","email":"gteers2@about.me","gender":"Polygender","ip_address":"18.207.113.97","age":66}])
+db.users.find().pretty()
+db.users.find({"gender" : "Polygender"}).pretty()
+db.users.findOne()
+ db.users.update({"first_name" : "Price"},{$set:{last_name:"saha"}})
+ db.users.updateMany({"gender" : "Polygender"},{$set:{era:"90s"}})
+  db.users.remove({"first_name" : "Ailyn"})
+   db.dropDatabase()
