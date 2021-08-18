@@ -1,0 +1,19 @@
+--host=localhost --port 27017 --db=moviedb --collection=mock_movie --file=downloads/movie_mock1.json --jsonArray
+mongo
+show dbs
+switched to db moviedb
+db.mock_movie.find({movie_name:{$eq:"Gotti"}})
+db.mock_movie.find({movie_name:{$ne:"Gotti"}})
+db.mock_movie.find({budget:{$gt:10000}})
+db.mock_movie.find({budget:{$gte:10000}})
+db.mock_movie.find({budget:{$lt:10000}})
+db.mock_movie.find({budget:{$lte:10000}})
+db.mock_movie.find({$and:[{poduction_year:{$gt:2000}},{budget:{$gt:10000}}]})
+db.mock_movie.find({$or:[{poduction_year:{$gt:2000}},{budget:{$gt:10000}}]})
+db.mock_movie.find({$and:[{poduction_year:{$not:{$gt:2000}}},{budget:{$not:{$gt:10000}}}]})
+db.mock_movie.find({$or:[{poduction_year:{$not:{$gt:2000}}},{budget:{$not:{$gt:10000}}}]})
+db.mock_movie.find({$nor:[{poduction_year:{$gt:2000}},{budget:{$gt:10000}}]})
+db.mock_movie.find({budget:{$in:[2000,2001,2002,20003,2004,2005,2006,2007,2008,2009,2010]}})
+db.mock_movie.find().sort({poduction_year:-1,movie_name:1})
+db.mock_movie.find().limit(5).skip(10)
+db.mock_movie.find().sort({poduction_year:-1,movie_name:1}).limit(10).forEach((el)=>db.mock_movie.update({_id:el._id},{$unset:{genre:1}}))
